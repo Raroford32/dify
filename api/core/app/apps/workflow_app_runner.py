@@ -690,3 +690,10 @@ class WorkflowBasedAppRunner(AppRunner):
 
     def _publish_event(self, event: AppQueueEvent) -> None:
         self.queue_manager.publish(event, PublishFrom.APPLICATION_MANAGER)
+
+    def execute_new_workflow(self, workflow: dict) -> None:
+        """
+        Execute a newly created workflow
+        """
+        # Placeholder implementation for executing a new workflow
+        print(f"Executing new workflow: {workflow}")

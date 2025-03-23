@@ -138,6 +138,45 @@ class DraftWorkflowApi(Resource):
             "updated_at": TimestampField().format(workflow.updated_at or workflow.created_at),
         }
 
+    @setup_required
+    @login_required
+    @account_initialization_required
+    @get_app_model(mode=[AppMode.ADVANCED_CHAT, AppMode.WORKFLOW])
+    def put(self, app_model: App):
+        """
+        Handle natural language descriptions and generate corresponding workflows and tools
+        """
+        if not current_user.is_editor:
+            raise Forbidden()
+
+        parser = reqparse.RequestParser()
+        parser.add_argument("description", type=str, required=True, location="json")
+        args = parser.parse_args()
+
+        description = args["description"]
+
+        # Placeholder implementation for generating workflows and tools
+        workflow = {
+            "description": description,
+            "steps": [
+                {"name": "Step 1", "action": "Action 1"},
+                {"name": "Step 2", "action": "Action 2"},
+            ],
+        }
+
+        tool = {
+            "description": description,
+            "parameters": [
+                {"name": "Parameter 1", "type": "string"},
+                {"name": "Parameter 2", "type": "integer"},
+            ],
+        }
+
+        return {
+            "workflow": workflow,
+            "tool": tool,
+        }
+
 
 class AdvancedChatDraftWorkflowRunApi(Resource):
     @setup_required
