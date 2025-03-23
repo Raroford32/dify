@@ -5,7 +5,6 @@ from typing import Any, Optional
 
 from core.agent.base_agent_runner import BaseAgentRunner
 from core.agent.entities import AgentScratchpadUnit
-from core.agent.output_parser.cot_output_parser import CotAgentOutputParser
 from core.app.apps.base_app_queue_manager import PublishFrom
 from core.app.entities.queue_entities import QueueAgentThoughtEvent, QueueMessageEndEvent, QueueMessageFileEvent
 from core.model_runtime.entities.llm_entities import LLMResult, LLMResultChunk, LLMResultChunkDelta, LLMUsage
@@ -423,3 +422,17 @@ class CotAgentRunner(BaseAgentRunner, ABC):
             memory=self.memory,
         ).get_prompt()
         return historic_prompts
+
+    def create_workflow_from_description(self, description: str) -> dict:
+        """
+        Create a workflow from a natural language description
+        """
+        workflow = self.parse_natural_language_to_workflow(description)
+        return workflow
+
+    def create_tool_from_description(self, description: str) -> dict:
+        """
+        Create a tool from a natural language description
+        """
+        tool = self.parse_natural_language_to_tool(description)
+        return tool

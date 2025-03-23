@@ -99,6 +99,7 @@ import { useEventEmitterContextContext } from '@/context/event-emitter'
 import Confirm from '@/app/components/base/confirm'
 import { FILE_EXTS } from '@/app/components/base/prompt-editor/constants'
 import { fetchFileUploadConfig } from '@/service/common'
+import ChatBox from './chat-box'
 
 const nodeTypes = {
   [CUSTOM_NODE]: CustomNode,
@@ -222,7 +223,7 @@ const Workflow: FC<WorkflowProps> = memo(({
           pageX: e.clientX,
           pageY: e.clientY,
           elementX: e.clientX - containerClientRect.left,
-          elementY: e.clientY - containerClientRect.top,
+          elementY: e.clientX - containerClientRect.top,
         },
       })
     }
@@ -333,6 +334,7 @@ const Workflow: FC<WorkflowProps> = memo(({
       }
       <LimitTips />
       <PluginDependency />
+      <ChatBox />
       <ReactFlow
         nodeTypes={nodeTypes}
         edgeTypes={edgeTypes}

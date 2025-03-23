@@ -511,3 +511,31 @@ class BaseAgentRunner(AppRunner):
                 )
             )
         return UserPromptMessage(content=prompt_message_contents)
+
+    def parse_natural_language_to_workflow(self, description: str) -> dict:
+        """
+        Parse natural language description to generate a workflow
+        """
+        # Placeholder implementation
+        workflow = {
+            "description": description,
+            "steps": [
+                {"name": "Step 1", "action": "Action 1"},
+                {"name": "Step 2", "action": "Action 2"},
+            ],
+        }
+        return workflow
+
+    def parse_natural_language_to_tool(self, description: str) -> dict:
+        """
+        Parse natural language description to generate a tool
+        """
+        # Placeholder implementation
+        tool = {
+            "description": description,
+            "parameters": [
+                {"name": "Parameter 1", "type": "string"},
+                {"name": "Parameter 2", "type": "integer"},
+            ],
+        }
+        return tool
